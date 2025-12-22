@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hussain Luggage Store - Premium Travel Luggage & Accessories</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div id="header">
+    <div class="lefticons">
+      <button class="menu" id="menuBtn"><img src="assets/icons/menu.png" alt="menu"></button>
+      <div class="hidden">h</div>
+    </div>
+    <div class="logo"><img src="assets/icons/logo.png" alt="Hussain Luggage Store"></div>
+    <div class="righticons">
+      <div class="search"><img src="assets/icons/search.png" alt="search"></div>
+      <div class="cart"><img src="assets/icons/cart.png" alt="cart"></div>
+    </div>
+  </div>  
+
+<div class="overlay" id="overlay"></div>
+
+<!-- Search Dropdown -->
+<div class="search-dropdown" id="searchDropdown">
+  <input type="text" id="searchInput" placeholder="Search for products..." autocomplete="off">
+  <button class="search-close-btn" id="searchCloseBtn">✕</button>
+</div>
+
+<nav class="navlinks">
+  <a href="#">ALL PRODUCTS</a>
+  
+  <!-- Shop by Brands Dropdown -->
+  <div class="nav-dropdown">
+    <a href="#" class="dropdown-toggle">SHOP BY BRANDS <span class="dropdown-arrow">▼</span></a>
+    <div class="dropdown-menu">
+      <a href="#" data-brand="American Tourister">American Tourister</a>
+      <a href="#" data-brand="Delsey">Delsey</a>
+      <a href="#" data-brand="iFLY">iFLY</a>
+      <a href="#" data-brand="IT">IT</a>
+      <a href="#" data-brand="Samsonite">Samsonite</a>
+      <a href="#" data-brand="Swiss Gear">Swiss Gear</a>
+      <a href="#" data-brand="Tommy">Tommy</a>
+      <a href="#" data-brand="VIP">VIP</a>
+      <a href="#" data-brand="DKNY">DKNY</a>
+      <a href="#" data-brand="Timberland">Timberland</a>
+    </div>
+  </div>
+  
+  <!-- Shop by Category Dropdown -->
+  <div class="nav-dropdown">
+    <a href="#" class="dropdown-toggle">SHOP BY CATEGORY <span class="dropdown-arrow">▼</span></a>
+    <div class="dropdown-menu">
+      <a href="#" data-category="Hard Sided">Hard Sided</a>
+      <a href="#" data-category="Soft Sided">Soft Sided</a>
+      <a href="#" data-category="Duffle Bags">Duffle Bags</a>
+    </div>
+  </div>
+  
+  <a href="#">OUR STORES</a>
+  <a href="#">CONTACT US</a>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-title">Premium Luggage for Your Journey</h1>
+    <p class="hero-subtitle">Discover our collection of high-quality suitcases, backpacks, and travel accessories</p>
+    <div class="hero-buttons">
+      <a href="#productsSection" class="btn btn-primary" id="shopNowBtn">Shop Now</a>
+    </div>
+  </div>
+  <div class="hero-image">
+    <!-- You can add a background image here or use CSS gradient -->
+  </div>
+</section>
+
+<!-- Products Section -->
+<section class="products-section" id="productsSection">
+  <div class="container">
+    <h2 class="section-title">Featured Products</h2>
+    <p class="section-subtitle">Browse our best-selling luggage and travel accessories</p>
+    
+    <div class="products-grid" id="productsGrid">
+      <!-- Product cards will be generated dynamically from productsData.js -->
+    </div>
+  </div>
+</section>
+
+<script src="productdata.js"></script>
+<script src="script.js"></script>
+
+
+</body>
+</html>
