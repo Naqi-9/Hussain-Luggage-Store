@@ -3,96 +3,209 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Hussain Luggage Store - Premium travel suitcases, backpacks, and accessories. Shop the world's best brands in one place.">
   <title>Hussain Luggage Store - Premium Travel Luggage & Accessories</title>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Modern 2025 Font Integration -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="fonts.googleapis.com" rel="stylesheet">
+  
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <div id="header">
-    <div class="lefticons">
-      <button class="menu" id="menuBtn"><img src="assets/icons/menu.png" alt="menu"></button>
-      <div class="hidden">h</div>
+  <!-- MASTER HEADER: Groups Logo row and Nav links together for Desktop + Quick View -->
+  <div class="master-header">
+    <div id="header">
+      <div class="lefticons">
+        <button class="menu" id="menuBtn"><img src="assets/icons/menu.png" alt="menu"></button>
+        <div class="hidden">h</div>
+      </div>
+      
+      <div class="logo">
+        <img src="assets/icons/logo.png" alt="Hussain Luggage Store">
+      </div>
+      
+      <div class="righticons">
+        <div class="search"><img src="assets/icons/search.png" alt="search"></div>
+        <div class="cart" id="cartIcon">
+          <img src="assets/icons/cart.png" alt="cart">
+          <span class="cart-badge" id="cartBadge">0</span>
+        </div>
+        
+        <!-- Search Dropdown is now strictly contained in the header bar -->
+        <div class="search-dropdown" id="searchDropdown">
+          <input type="text" id="searchInput" placeholder="Search for products..." autocomplete="off">
+          <button class="search-close-btn" id="searchCloseBtn">✕</button>
+        </div>
+      </div>
+    </div>  
+
+    <nav class="navlinks">
+      <a href="#">ALL PRODUCTS</a>
+      
+      <!-- Shop by Brands Dropdown -->
+      <div class="nav-dropdown">
+        <a href="#" class="dropdown-toggle">SHOP BY BRANDS <span class="dropdown-arrow">▼</span></a>
+        <div class="dropdown-menu">
+          <a href="" data-brand="American Tourister">American Tourister</a>
+          <a href="#" data-brand="Delsey">Delsey</a>
+          <a href="#" data-brand="iFLY">iFLY</a>
+          <a href="#" data-brand="IT">IT</a>
+          <a href="#" data-brand="Samsonite">Samsonite</a>
+          <a href="#" data-brand="Swiss Gear">Swiss Gear</a>
+          <a href="#" data-brand="Tommy">Tommy</a>
+          <a href="#" data-brand="VIP">VIP</a>
+          <a href="#" data-brand="DKNY">DKNY</a>
+          <a href="#" data-brand="Timberland">Timberland</a>
+        </div>
+      </div>
+      
+      <!-- Shop by Category Dropdown -->
+      <div class="nav-dropdown">
+        <a href="#" class="dropdown-toggle">SHOP BY CATEGORY <span class="dropdown-arrow">▼</span></a>
+        <div class="dropdown-menu">
+          <a href="#" data-category="Hard Sided">Hard Sided</a>
+          <a href="#" data-category="Soft Sided">Soft Sided</a>
+          <a href="#" data-category="Duffle Bags">Duffle Bags</a>
+        </div>
+      </div>
+      
+      <a href="store.html">OUR STORE</a>
+      <a href="#">CONTACT US</a>
+    </nav>
+  </div> <!-- End Master Header -->
+
+  <!-- Overlay for Mobile Menu background dimming -->
+  <div class="overlay" id="overlay"></div>
+
+  <!-- Cart Drawer -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-drawer-header">
+      <h2>Your Cart</h2>
+      <button class="cart-close-btn" id="cartCloseBtn">✕</button>
     </div>
-    <div class="logo"><img src="assets/icons/logo.png" alt="Hussain Luggage Store"></div>
-    <div class="righticons">
-      <div class="search"><img src="assets/icons/search.png" alt="search"></div>
-      <div class="cart"><img src="assets/icons/cart.png" alt="cart"></div>
+    <div class="cart-drawer-content" id="cartContent">
+      <div class="cart-empty" id="cartEmpty">
+        <p>Your cart is empty</p>
+        <p class="cart-empty-subtitle">Add items to get started</p>
+      </div>
+      <div class="cart-items" id="cartItems">
+        <!-- Cart items will be dynamically inserted here -->
+      </div>
     </div>
-  </div>  
+    <div class="cart-drawer-footer" id="cartFooter">
+      <div class="cart-total">
+        <div class="cart-total-row">
+          <span>Subtotal:</span>
+          <span id="cartSubtotal">Rs. 0</span>
+        </div>
+        <div class="cart-total-row cart-total-final">
+          <span>Total:</span>
+          <span id="cartTotal">Rs. 0</span>
+        </div>
+      </div>
+      <button class="cart-checkout-btn" id="cartCheckoutBtn">Checkout</button>
+    </div>
+  </div>
 
-<div class="overlay" id="overlay"></div>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">Premium Luggage for Your Journey</h1>
+      <p class="hero-subtitle">Discover our collection of high-quality suitcases, backpacks, and travel accessories</p>
+      <div class="hero-buttons">
+        <a href="#productsSection" class="btn btn-primary" id="shopNowBtn">Shop Now</a>
+      </div>
+    </div>
+  </section>
 
-<!-- Search Dropdown -->
-<div class="search-dropdown" id="searchDropdown">
-  <input type="text" id="searchInput" placeholder="Search for products..." autocomplete="off">
-  <button class="search-close-btn" id="searchCloseBtn">✕</button>
-</div>
+  <!-- Products Section -->
+  <section class="products-section" id="productsSection">
+    <div class="container">
+      <h2 class="section-title">Featured Products</h2>
+      <p class="section-subtitle">Browse our best-selling luggage and travel accessories</p>
+      
+      <div class="products-grid" id="productsGrid">
+        <!-- Generated dynamically via productdata.js -->
+      </div>
+    </div>
+  </section>
 
-<nav class="navlinks">
-  <a href="#">ALL PRODUCTS</a>
+  <!-- PRODUCT DETAIL PAGE (FULL SCREEN MODAL) -->
+  <div class="product-modal" id="productModal">
+    <div class="modal-content">
+      <button class="back-to-store" id="backToStore">Back to Store</button>
+    <div class = "modal-flex">
+      <div class="modal-body">
+        <!-- Left Column: Image Gallery -->
+        <div class="modal-images">
+          <div class="main-display">
+            <button class="image-nav-btn" id="imagePrevBtn" onclick="navigateImage('prev')" style="display: none;">‹</button>
+            <img src="" id="modalMainImg" alt="Product Display">
+            <button class="image-nav-btn" id="imageNextBtn" onclick="navigateImage('next')" style="display: none;">›</button>
+          </div>
+          <div class="thumbnails", id="Thumbnails">
+          <div class="image-thumbnails" id="modalThumbnails">
+            <!-- Dynamically generated mini-images -->
+          </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Product Info & Actions -->
+        <div class="modal-info">
+          <h2 id="modalName"></h2>
+          
+          <div class="modal-labels">
+
+
+          </div>
+          
+          <p class="modal-price" id="modalPrice"></p>
+
+          <div class="modal-section">
+            <h4>Select Color:</h4>
+            <div class="color-options" id="modalColors"></div>
+          </div>
+
+          <div class="modal-section" id="sizeSection">
+            <h4>Select Size:</h4>
+            <div class="size-options" id="modalSizes"></div>
+          </div>
+          
+          <div class="modal-section">
+            <h4>Quantity:</h4>
+            <div class="quantity-selector">
+                <button type="button" class="qty-btn" id="qtyMinus">−</button>
+                <input type="number" id="qtyInput" value="1" min="1" readonly>
+                <button type="button" class="qty-btn" id="qtyPlus">+</button>
+            </div>
+          </div>
+          <!-- Dual Primary Action Buttons -->
+          <div class="modal-actions">
+            <button class="add-to-cart-btn-large">Add to Cart</button>
+            <button class="buy-now-btn">Buy Now</button>
+          </div>
+
+          <div class="modal-section">
+            <h4>Description:</h4>
+            <p id="modalDescription" class="description-text"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>  
+  </div>
+
+  <!-- Scripts -->
   
-  <!-- Shop by Brands Dropdown -->
-  <div class="nav-dropdown">
-    <a href="#" class="dropdown-toggle">SHOP BY BRANDS <span class="dropdown-arrow">▼</span></a>
-    <div class="dropdown-menu">
-      <a href="#" data-brand="American Tourister">American Tourister</a>
-      <a href="#" data-brand="Delsey">Delsey</a>
-      <a href="#" data-brand="iFLY">iFLY</a>
-      <a href="#" data-brand="IT">IT</a>
-      <a href="#" data-brand="Samsonite">Samsonite</a>
-      <a href="#" data-brand="Swiss Gear">Swiss Gear</a>
-      <a href="#" data-brand="Tommy">Tommy</a>
-      <a href="#" data-brand="VIP">VIP</a>
-      <a href="#" data-brand="DKNY">DKNY</a>
-      <a href="#" data-brand="Timberland">Timberland</a>
-    </div>
-  </div>
-  
-  <!-- Shop by Category Dropdown -->
-  <div class="nav-dropdown">
-    <a href="#" class="dropdown-toggle">SHOP BY CATEGORY <span class="dropdown-arrow">▼</span></a>
-    <div class="dropdown-menu">
-      <a href="#" data-category="Hard Sided">Hard Sided</a>
-      <a href="#" data-category="Soft Sided">Soft Sided</a>
-      <a href="#" data-category="Duffle Bags">Duffle Bags</a>
-    </div>
-  </div>
-  
-  <a href="#">OUR STORES</a>
-  <a href="#">CONTACT US</a>
-</nav>
-
-<!-- Hero Section -->
-<section class="hero">
-  <div class="hero-content">
-    <h1 class="hero-title">Premium Luggage for Your Journey</h1>
-    <p class="hero-subtitle">Discover our collection of high-quality suitcases, backpacks, and travel accessories</p>
-    <div class="hero-buttons">
-      <a href="#productsSection" class="btn btn-primary" id="shopNowBtn">Shop Now</a>
-    </div>
-  </div>
-  <div class="hero-image">
-    <!-- You can add a background image here or use CSS gradient -->
-  </div>
-</section>
-
-<!-- Products Section -->
-<section class="products-section" id="productsSection">
-  <div class="container">
-    <h2 class="section-title">Featured Products</h2>
-    <p class="section-subtitle">Browse our best-selling luggage and travel accessories</p>
-    
-    <div class="products-grid" id="productsGrid">
-      <!-- Product cards will be generated dynamically from productsData.js -->
-    </div>
-  </div>
-</section>
-
-<script src="productdata.js"></script>
-<script src="script.js"></script>
-
+  <script src="supabase-config.js"></script>
+  <script src="api-service.js"></script>
+  <script src="productdata.js"></script>
+  <script src="script.js"></script>
 
 </body>
 </html>

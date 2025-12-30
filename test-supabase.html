@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Supabase Connection</title>
+</head>
+<body>
+  <h1>Supabase Connection Test</h1>
+  <button onclick="testConnection()">Test Connection</button>
+  <div id="result" style="margin-top: 20px; padding: 20px; border: 1px solid #ccc; white-space: pre-wrap;"></div>
+
+  <script src="supabase-config.js"></script>
+  <script>
+    async function testConnection() {
+      const resultDiv = document.getElementById('result');
+      resultDiv.textContent = 'Testing...\n';
+      
+      try {
+        // Test 1: Check config
+        resultDiv.textContent += '✓ Config loaded\n';
+        resultDiv.textContent += `  URL: ${window.SUPABASE_CONFIG.url}\n`;
+        resultDiv.textContent += `  Key: ${window.SUPABASE_CONFIG.anonKey.substring(0, 20)}...\n\n`;
+        
+        // Test 2: Fetch products
+        resultDiv.textContent += 'Fetching products...\n';
+        const data = await window.fetchFromSupabase('products', '*');
+        
+        resultDiv.textContent += `✓ Success! Found ${data.length} product(s)\n\n`;
+        resultDiv.textContent += 'Product data:\n';
+        resultDiv.textContent += JSON.stringify(data, null, 2);
+        
+        if (data.length === 0) {
+          resultDiv.textContent += '\n\n⚠️ No products found. Please add products in Supabase dashboard.';
+        }
+        
+      } catch (error) {
+        resultDiv.textContent += `\n✗ Error: ${error.message}\n`;
+        resultDiv.textContent += `Full error: ${JSON.stringify(error, null, 2)}`;
+        
+        if (error.message.includes('404')) {
+          resultDiv.textContent += '\n\n⚠️ Table "products" not found. Make sure you created the table using the SQL in SUPABASE_SETUP.md';
+        } else if (error.message.includes('permission') || error.message.includes('policy')) {
+          resultDiv.textContent += '\n\n⚠️ Permission error. Check Row Level Security (RLS) policies in Supabase.';
+        }
+      }
+    }
+  </script>
+</body>
+</html>
+

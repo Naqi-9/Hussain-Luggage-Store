@@ -1,406 +1,18 @@
-// Product Data Structure - Easy to manage for developer options
+
 // This structure allows easy addition, removal, and editing of products
+//
+// IMAGE SUPPORT:
+// - Single image per color: Use "image": "path/to/image.jpg"
+// - Multiple images per color (1-5 images): Use "images": ["path1.jpg", "path2.jpg", "path3.jpg"]
+// - The system supports both formats and will automatically handle them
+// - When multiple images are provided, an image slider will appear with navigation arrows
+//
+// Example with multiple images:
+// colors: [
+//   { name: "Red", code: "#DC143C", available: true, images: ["img1.jpg", "img2.jpg", "img3.jpg"] },
+//   { name: "Blue", code: "#0000FF", available: true, image: "img.jpg" } // Single image still works
+// ]
 
-const productsData = [
-  {
-    id: 1,
-    name: "Airway Princeton",
-    basePrice: 36000,
-    colors: [
-      { name: "Aqua Green", code: "#00CED1", available: true },
-      { name: "Black", code: "#000000", available: true },
-      { name: "Cherry Pink", code: "#DE3163", available: true },
-      { name: "Midnight Blue", code: "#191970", available: true },
-      { name: "Taupe Grey", code: "#8B8589", available: true }
-    ]
-  },
-  {
-    id: 2,
-    name: "American Tourister Bagpack",
-    basePrice: 7000,
-    brand: "American Tourister",
-    colors: [
-      { name: "Default", code: "#333333", available: true }
-    ]
-  },
-  {
-    id: 3,
-    name: "American Tourister Deep Dive",
-    basePrice: 48000,
-    brand: "American Tourister",
-    category: "Hard Sided",
-    colors: [
-      { name: "Red", code: "#DC143C", available: true , image: "assets/product images/American Tourister/Deep Dive Red.webp"},
-      { name: "Blue", code: "#0000FF", available: true, image: "assets/product images/American Tourister/Deep Dive Blue.webp" },
-      { name: "Navy Blue", code: "#000080", available: false }
-    ]
-  },
-  {
-    id: 4,
-    name: "American Tourister Marina",
-    basePrice: 50000,
-    brand: "American Tourister",
-    category: "Hard Sided",
-    colors: [
-      { name: "Red", code: "#DC143C", available: true, image: "assets/product images/American Tourister/Marina Red.jpg" },
-    ]
-  },
-  {
-    id: 5,
-    name: "American Tourister Duncan Plus",
-    basePrice: 47000,
-    brand: "American Tourister",
-    colors: [
-      { name: "Black", code: "#000000", available: true, image: "assets/product images/American Tourister/Duncan Plus Black.jpg" },
-      { name: "Blue", code: "#0000FF", available: true, image: "assets/product images/American Tourister/Duncan Plus Blue.jpg"},
-    ]
-  },
-  {
-    id: 6,
-    name: "American Tourister Pulsonic",
-    basePrice: 53000,
-    brand: "American Tourister",
-    colors: [
-      { name: "Black", code: "#000000", available: true, image: "assets/product images/American Tourister/Pulsonic Black.jpg" },
-      { name: "Blue", code: "#0000FF", available: true, image: "assets/product images/American Tourister/Pulsonic Blue.webp"},
-      { name: "Purple", code: "#800080", available: true, image: "assets/product images/American Tourister/Pulsonic Purple.webp"},
-    ]
-  },
-  {
-    id: 7,
-    name: "American Tourister Skycove",
-    basePrice: 0,
-    brand: "American Tourister",
-    colors: [
-      { name: "Silver", code: "#C0C0C0", available: false }
-    ]
-  },
-  {
-    id: 8,
-    name: "Berg Germany",
-    basePrice: 58000,
-    colors: [
-      { name: "Black", code: "#000000", available: true, image: "assets/product images/Berg Germany/Black.webp" },
-      { name: "Brown", code: "#8B4513", available: true },
-      { name: "Grey", code: "#808080", available: true, image: "assets/product images/Berg Germany/Grey.webp" },
-      { name: "Navy", code: "#000080", available: true, image: "assets/product images/Berg Germany/Navy.webp" },
-      { name: "Purplish Red", code: "#8B008B", available: true, image: "assets/product images/Berg Germany/Purplish Red.webp" }
-    ]
-  },
-  {
-    id: 9,
-    name: "Cat Backpack",
-    basePrice: 2950,
-    category: "Backpack",
-    colors: [
-      { name: "Default", code: "#333333", available: true }
-    ]
-  },
-  {
-    id: 10,
-    name: "Cat Original Backpack",
-    basePrice: 9500,
-    colors: [
-      { name: "Default", code: "#333333", available: true }
-    ]
-  },
-  {
-    id: 11,
-    name: "Delsey AA",
-    basePrice: 65000,
-    brand: "Delsey",
-    category: "Hard Sided",
-    colors: [
-      { name: "Black", code: "#000000", available: true, image: "assets/product images/Delsey/AA Black.jpg" },
-      { name: "Dark Blue", code: "#00008B", available: true, image: "assets/product images/Delsey/AA Dark Blue.jpg" },
-      { name: "Dark Green", code: "#006400", available: true, image: "assets/product images/Delsey/AA Dark Green.jpg" },
-      { name: "Purple", code: "#800080", available: true, image: "assets/product images/Delsey/AA Purple.jpg" }
-    ]
-  },
-  {
-    id: 12,
-    name: "Delsey Caracus",
-    basePrice: 48000,
-    brand: "Delsey",
-    colors: [
-      { name: "Black", code: "#000000", available: true, image: "assets/product images/Delsey/Caracus Black.webp" },
-    ]
-  },
-  {
-    id: 13,
-    name: "Delsey Cuzco",
-    basePrice: 48000,
-    brand: "Delsey",
-    category: "Hard Sided",
-    colors: [
-      { name: "Red", code: "#DC143C", available: true, image: "assets/product images/Delsey/Cuzco Red.jpg" },
-      { name: "Lavender", code: "#E6E6FA", available: true, image: "assets/product images/Delsey/Cuzco Lavender.webp" }
-    ]
-  },
-  {
-    id: 14,
-    name: "Delsey Shadow",
-    basePrice: 75000,
-    brand: "Delsey",
-    category: "Hard Sided",
-    colors: [
-      { name: "Black", code: "#000000", available: true, image: "assets/product images/Delsey/Shadow Black.jpg" },
-      { name: "Blue", code: "#0000FF", available: true, image: "assets/product images/Delsey/Shadow Blue.jpg" },
-      { name: "Dark Green", code: "#006400", available: true, image: "assets/product images/Delsey/Shadow Dark Green.jpg" },
-      { name: "Silver", code: "#C0C0C0", available: true, image: "assets/product images/Delsey/Shadow Silver.jpg" }
-    ]
-  },
-  {
-    id: 15,
-    name: "DKNY 626 Deco",
-    basePrice: 90000,
-    brand: "DKNY",
-    category: "Hard Sided",
-    colors: [
-      { name: "Green", code: "#008000", available: true },
-      { name: "Purple", code: "#800080", available: true }
-    ]
-  },
-  {
-    id: 16,
-    name: "Dockers",
-    basePrice: 28000,
-    colors: [
-      { name: "Maroon", code: "#800000", available: true }
-    ]
-  },
-  {
-    id: 17,
-    name: "Flieger",
-    basePrice: 40000,
-    colors: [
-      { name: "Black", code: "#000000", available: true },
-      { name: "Navy Blue", code: "#000080", available: true },
-      { name: "White", code: "#FFFFFF", available: true }
-    ]
-  },
-  {
-    id: 18,
-    name: "iFLY Fibertech",
-    basePrice: 35000,
-    brand: "iFLY",
-    colors: [
-      { name: "Black", code: "#000000", available: true, image: "assets/product images/iFLY/FiberTech Black.webp" },
-      { name: "Cotton Candy", code: "#FFB6C1", available: true, image: "assets/product images/iFLY/FiberTech Cotton Candy.webp" },
-      { name: "Two Tone Blue", code: "#4169E1", available: true, image: "assets/product images/iFLY/FiberTech TwoTone Blue.webp" },
-      { name: "Midnight Berry Purple", code: "#4B0082", available: true, image: "assets/product images/iFLY/FiberTech Midnight Berry Purple.webp" }
-    ]
-  },
-  {
-    id: 19,
-    name: "IT 14/2916",
-    basePrice: 65000,
-    brand: "IT",
-    colors: [
-      { name: "Green", code: "#008000", available: true, image: "assets/product images/IT/14 Green.webp" },
-    ]
-  },
-  {
-    id: 20,
-    name: "IT 17/2651",
-    basePrice: 65000,
-    brand: "IT",
-    colors: [
-      { name: "Black", code: "#000000", available: true, },
-      { name: "Green", code: "#008000", available: true },
-      { name: "Grey", code: "#808080", available: true }
-    ]
-  },
-
-  {
-    id: 21,
-    name: "IT 21/2884",
-    basePrice: 68000,
-    brand: "IT",
-    colors: [
-      { name: "Brown", code: "#8B4513", available: true, image: "assets/product images/IT/21 Brown.webp" },
-      { name: "O White", code: "#F4F0E0", available: true, image: "assets/product images/IT/21 White.webp" },
-      { name: "Pink", code: "#FFC0CB", available: true, image: "assets/product images/IT/21 Pink.webp" }
-    ]
-  },
-  {
-    id: 22,
-    name: "IT 52/3039",
-    basePrice: 85000,
-    brand: "IT",
-    colors: [
-      { name: "Owhite", code: "#F4F0E0", available: true, image: "assets/product images/IT/52 Owhite.webp" },
-    ]
-  },
-  {
-    id: 23,
-    name: "IT 73/2881 Spontaneous",
-    basePrice: 60000,
-    brand: "IT",
-    colors: [
-      { name: "Blue", code: "#0000FF", available: true, image: "assets/product images/IT/73 Blue Spontaneous.webp" },
-      { name: "Green", code: "#008000", available: true, image: "assets/product images/IT/73 Green Spontaneous.webp" },
-      { name: "Pink", code: "#FFC0CB", available: true, image: "assets/product images/IT/73 Pink Spontaneous.webp" }
-    ]
-  },
-  {
-    id: 25,
-    name: "IT Fashionista Advant",
-    basePrice: 60000,
-    brand: "IT",
-    colors: [
-      { name: "Charcoal", code: "#36454F", available: true }
-    ]
-  },
-  {
-    id: 26,
-    name: "IT Fashionista Black Impakt",
-    basePrice: 60000,
-    brand: "IT",
-    colors: [
-      { name: "Black", code: "#000000", available: true }
-    ]
-  },
-  {
-    id: 27,
-    name: "Jeep",
-    basePrice: 42000,
-    colors: [
-      { name: "Grey Polygon", code: "#808080", available: true },
-      { name: "Silver 4x4", code: "#C0C0C0", available: true },
-      { name: "Yellow Polygon", code: "#FFD700", available: true }
-    ]
-  },
-  {
-    id: 28,
-    name: "POLO US",
-    basePrice: 40000,
-    colors: [
-      { name: "Blue", code: "#0000FF", available: true },
-      { name: "Coffee", code: "#6F4E37", available: true },
-      { name: "Green", code: "#008000", available: true }
-    ]
-  },
-  {
-    id: 29,
-    name: "Pierre Cardin",
-    basePrice: 80000,
-    colors: [
-      { name: "Black", code: "#000000", available: true },
-      { name: "SG", code: "#708090", available: true },
-      { name: "White", code: "#FFFFFF", available: true }
-    ]
-  },
-  {
-    id: 30,
-    name: "Samsnite Soft",
-    basePrice: 50000,
-    brand: "Samsonite",
-    colors: [
-      { name: "Black", code: "#000000", available: true }
-    ]
-  },
-  {
-    id: 31,
-    name: "Smile",
-    basePrice: 48000,
-    colors: [
-      { name: "Black", code: "#000000", available: true }
-    ]
-  },
-  {
-    id: 32,
-    name: "SwissGear",
-    basePrice: 40000,
-    brand: "Swiss Gear",
-    colors: [
-      { name: "Black", code: "#000000", available: true },
-      { name: "Green", code: "#008000", available: true },
-      { name: "Grey", code: "#808080", available: true }
-    ]
-  },
-  {
-    id: 33,
-    name: "Timberland",
-    basePrice: 26000,
-    brand: "Timberland",
-    category: "Duffle Bags",
-    colors: [
-      { name: "Black", code: "#000000", available: true },
-      { name: "Grey Black", code: "#2F2F2F", available: true }
-    ]
-  },
-  {
-    id: 34,
-    name: "Tommy L",
-    basePrice: 60000,
-    brand: "Tommy",
-    colors: [
-      { name: "Green", code: "#008000", available: true },
-      { name: "Grey", code: "#808080", available: true },
-      { name: "Red", code: "#DC143C", available: true }
-    ]
-  },
-  {
-    id: 35,
-    name: "Tommy M",
-    basePrice: 75000,
-    brand: "Tommy",
-    colors: [
-      { name: "Black", code: "#000000", available: true },
-      { name: "Red", code: "#DC143C", available: true },
-      { name: "White", code: "#FFFFFF", available: true }
-    ]
-  },
-  {
-    id: 36,
-    name: "Travel Choice",
-    basePrice: 38000,
-    colors: [
-      { name: "Pink", code: "#FFC0CB", available: true }
-    ]
-  },
-  {
-    id: 37,
-    name: "Travel Club",
-    basePrice: 48000,
-    colors: [
-      { name: "Golden Brown", code: "#CD853F", available: true },
-      { name: "Metal Grey", code: "#708090", available: true },
-      { name: "Mint Green", code: "#98FB98", available: true },
-      { name: "Navy Blue", code: "#000080", available: true }
-    ]
-  },
-  {
-    id: 38,
-    name: "Traveler's Choice",
-    basePrice: 60000,
-    brand: null,
-    category: "Hard Sided",
-    colors: [
-      { name: "Black", code: "#000000", available: true }
-    ]
-  },
-  {
-    id: 39,
-    name: "VIP Redeemer",
-    basePrice: 35000,
-    brand: "VIP",
-    colors: [
-      { name: "Maroon", code: "#800000", available: true },
-      { name: "Olive Green", code: "#556B2F", available: true },
-      { name: "Red", code: "#DC143C", available: true }
-    ]
-  },
-  {
-    id: 40,
-    name: "Wilson Fashion",
-    basePrice: 48000,
-    colors: [
-      { name: "Black", code: "#000000", available: true }
-    ]
-  }
-];
 
 // Helper function to extract brand from product name
 function getBrandFromName(name) {
@@ -473,7 +85,7 @@ let currentFilterCategory = null;
 let currentSearchQuery = null;
 
 // Function to render products with optional filters
-function renderProducts(filterBrand = null, filterCategory = null, searchQuery = null) {
+async function renderProducts(filterBrand = null, filterCategory = null, searchQuery = null) {
   const productsGrid = document.getElementById('productsGrid');
   const productsSection = document.querySelector('.products-section .container');
   if (!productsGrid) return;
@@ -489,8 +101,47 @@ function renderProducts(filterBrand = null, filterCategory = null, searchQuery =
     existingHeader.remove();
   }
   
-  // Filter products
+  // Filter products - get from API if available, otherwise use static data
   let filteredProducts = productsData;
+  
+  // If productsData is empty, try to get from API
+  if (filteredProducts.length === 0 && window.getProducts) {
+    try {
+      const apiProducts = await window.getProducts();
+      if (apiProducts && apiProducts.length > 0) {
+        filteredProducts = apiProducts;
+        productsData = apiProducts; // Cache for next time
+      }
+    } catch (e) {
+      console.error('Error fetching products:', e);
+      // Show error message
+      productsGrid.innerHTML = '<div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #e74c3c;">Error loading products. Please check your Supabase configuration.</div>';
+      return;
+    }
+  }
+  
+  // If still no products, show message
+  if (filteredProducts.length === 0) {
+    productsGrid.innerHTML = '<div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #666;">No products available. Loading from database...</div>';
+    // Try to refresh
+    if (window.refreshProducts) {
+      try {
+        await window.refreshProducts();
+        filteredProducts = productsData;
+        if (filteredProducts.length === 0) {
+          productsGrid.innerHTML = '<div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #666;">No products found. Please add products in Supabase dashboard.</div>';
+          return;
+        }
+      } catch (e) {
+        console.error('Error refreshing products:', e);
+        productsGrid.innerHTML = '<div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #e74c3c;">Error loading products. Please check your Supabase configuration in supabase-config.js</div>';
+        return;
+      }
+    } else {
+      productsGrid.innerHTML = '<div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #666;">No products found.</div>';
+      return;
+    }
+  }
   let filterTitle = '';
   
   if (searchQuery && searchQuery.trim() !== '') {
@@ -526,7 +177,7 @@ function renderProducts(filterBrand = null, filterCategory = null, searchQuery =
     
     const titleElement = document.createElement('h2');
     titleElement.style.cssText = 'font-size: 2rem; font-weight: 700; color: #000; margin: 0; font-family: "Lato", sans-serif;';
-    titleElement.textContent = filterTitle;
+    titleElement.textContent = filterTitle || 'Featured Products';
     
     const seeAllBtn = document.createElement('button');
     seeAllBtn.id = 'seeAllProductsBtn';
@@ -544,7 +195,7 @@ function renderProducts(filterBrand = null, filterCategory = null, searchQuery =
     // Add click handler for See All Products button
     seeAllBtn.addEventListener('click', () => {
       if (typeof renderProducts === 'function') {
-        renderProducts(null, null, null);
+        renderProducts(null, null, null).catch(err => console.error('Error rendering products:', err));
       }
       // Clear search input if exists
       const searchInput = document.getElementById('searchInput');
@@ -583,20 +234,15 @@ function renderProducts(filterBrand = null, filterCategory = null, searchQuery =
     // Find first available color to select by default
     const firstAvailableIndex = product.colors.findIndex(c => c.available);
     
-    productCard.innerHTML = `
+        productCard.innerHTML = `
       <div class="product-image">
-
-       <!-- 2. THIS IS NEW: We add an <img> tag here. It uses the image path from the first color -->
         <img src="${firstAvailableColor.image || ''}" alt="${product.name}" class="main-product-img">
-        
-        <div class="product-overlay">
-          <button class="quick-view-btn">Quick View</button>
-        </div>
+        <!-- THE OLD OVERLAY DIV WAS REMOVED FROM HERE -->
       </div>
       <div class="product-info">
         <h3 class="product-name">${product.name}</h3>
         <div class="product-price">
-          <span class="current-price">Rs. ${price.toLocaleString('en-PK')}</span>
+          <span class="current-price">From Rs. ${price.toLocaleString('en-PK')}</span>
         </div>
         <div class="color-selector">
           <span class="color-label">Colors:</span>
@@ -607,7 +253,6 @@ function renderProducts(filterBrand = null, filterCategory = null, searchQuery =
                   class="color-circle ${color.available ? '' : 'out-of-stock'} ${index === firstAvailableIndex ? 'selected' : ''}" 
                   style="background-color: ${color.code};"
                   title="${color.name} ${color.available ? '' : '(Out of Stock)'}"
-                  /* 3. THIS IS NEW: We store the image path inside the circle so JS can find it later */
                   data-color-image="${color.image || ''}"
                 >
                   ${!color.available ? '<span class="diagonal-line"></span>' : ''}
@@ -616,18 +261,70 @@ function renderProducts(filterBrand = null, filterCategory = null, searchQuery =
             `).join('')}
           </div>
         </div>
-        <button class="add-to-cart-btn" ${price === 0 ? 'disabled' : ''}>Add to Cart</button>
+        <!-- CHANGED: Button text is now "QUICK VIEW" instead of "Add to Cart" -->
+        <button class="quick-view-btn" ${price === 0 ? 'disabled' : ''}>Quick View</button>
       </div>
     `;
+
     
     productsGrid.appendChild(productCard);
   });
 }
 
-// Initialize products on page load
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', renderProducts);
-} else {
-  renderProducts();
+// Initialize products on page load - NOW FETCHES FROM SUPABASE
+async function initializeProducts() {
+  const productsGrid = document.getElementById('productsGrid');
+  if (!productsGrid) {
+    console.error('Products grid not found!');
+    return;
+  }
+  
+  console.log('Initializing products...');
+  
+  // Show loading state
+  productsGrid.innerHTML = '<div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #666;">Loading products...</div>';
+  
+  try {
+    // Check if API service is loaded
+    if (!window.getProducts || typeof window.getProducts !== 'function') {
+      console.error('API service not loaded! Make sure api-service.js is loaded before productdata.js');
+      productsGrid.innerHTML = '<div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #e74c3c;">API service not loaded. Check script order in HTML.</div>';
+      return;
+    }
+    
+    // Fetch products from Supabase API
+    console.log('Calling window.getProducts()...');
+    const products = await window.getProducts();
+    console.log('Products received:', products);
+    console.log('Number of products:', products ? products.length : 0);
+    
+    if (products && products.length > 0) {
+      // Update global productsData reference
+      productsData = products;
+      console.log('Setting productsData to:', productsData.length, 'items');
+      // Render products
+      await renderProducts(null, null, null);
+      console.log('Products rendered successfully');
+    } else {
+      // No products found
+      console.warn('No products found in database');
+      productsGrid.innerHTML = '<div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #666;">No products available. Please add products in Supabase dashboard.</div>';
+    }
+  } catch (error) {
+    console.error('Error initializing products:', error);
+    console.error('Full error:', error);
+    productsGrid.innerHTML = `<div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #e74c3c;">
+      Error loading products. Check browser console for details.<br>
+      <small>Error: ${error.message}</small>
+    </div>`;
+  }
 }
 
+// Initialize on page load
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => {
+    initializeProducts(); 
+  });
+} else {
+  initializeProducts();
+}

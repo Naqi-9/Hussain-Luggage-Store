@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Visit Hussain Luggage Store - Find our location, store hours, and contact information">
+  <title>Our Store - Hussain Luggage Store</title>
+  
+  <!-- Modern 2025 Font Integration -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="fonts.googleapis.com" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- MASTER HEADER: Groups Logo row and Nav links together for Desktop + Quick View -->
+  <div class="master-header">
+    <div id="header">
+      <div class="lefticons">
+        <button class="menu" id="menuBtn"><img src="assets/icons/menu.png" alt="menu"></button>
+        <div class="hidden">h</div>
+      </div>
+      
+      <div class="logo">
+        <a href="index.html"><img src="assets/icons/logo.png" alt="Hussain Luggage Store"></a>
+      </div>
+      
+      <div class="righticons">
+        <div class="search"><img src="assets/icons/search.png" alt="search"></div>
+        <div class="cart" id="cartIcon">
+          <img src="assets/icons/cart.png" alt="cart">
+          <span class="cart-badge" id="cartBadge">0</span>
+        </div>
+        
+        <!-- Search Dropdown is now strictly contained in the header bar -->
+        <div class="search-dropdown" id="searchDropdown">
+          <input type="text" id="searchInput" placeholder="Search for products..." autocomplete="off">
+          <button class="search-close-btn" id="searchCloseBtn">✕</button>
+        </div>
+      </div>
+    </div>  
+
+    <nav class="navlinks">
+      <a href="index.html">ALL PRODUCTS</a>
+      
+      <!-- Shop by Brands Dropdown -->
+      <div class="nav-dropdown">
+        <a href="#" class="dropdown-toggle">SHOP BY BRANDS <span class="dropdown-arrow">▼</span></a>
+        <div class="dropdown-menu">
+          <a href="index.html" data-brand="American Tourister">American Tourister</a>
+          <a href="index.html" data-brand="Delsey">Delsey</a>
+          <a href="index.html" data-brand="iFLY">iFLY</a>
+          <a href="index.html" data-brand="IT">IT</a>
+          <a href="index.html" data-brand="Samsonite">Samsonite</a>
+          <a href="index.html" data-brand="Swiss Gear">Swiss Gear</a>
+          <a href="index.html" data-brand="Tommy">Tommy</a>
+          <a href="index.html" data-brand="VIP">VIP</a>
+          <a href="index.html" data-brand="DKNY">DKNY</a>
+          <a href="index.html" data-brand="Timberland">Timberland</a>
+        </div>
+      </div>
+      
+      <!-- Shop by Category Dropdown -->
+      <div class="nav-dropdown">
+        <a href="#" class="dropdown-toggle">SHOP BY CATEGORY <span class="dropdown-arrow">▼</span></a>
+        <div class="dropdown-menu">
+          <a href="index.html" data-category="Hard Sided">Hard Sided</a>
+          <a href="index.html" data-category="Soft Sided">Soft Sided</a>
+          <a href="index.html" data-category="Duffle Bags">Duffle Bags</a>
+        </div>
+      </div>
+      
+      <a href="store.html" class="active">OUR STORE</a>
+      <a href="#">CONTACT US</a>
+    </nav>
+  </div> <!-- End Master Header -->
+
+  <!-- Overlay for Mobile Menu background dimming -->
+  <div class="overlay" id="overlay"></div>
+
+  <!-- Location Page Content -->
+  <section class="location-section">
+    <div class="location-container">
+      <h1 class="location-title">Visit Our Store</h1>
+      <p class="location-subtitle">Find us at our convenient location</p>
+
+      <div class="location-content">
+        <!-- Store Information -->
+        <div class="store-info">
+          <div class="info-card">
+            <h2>Store Hours</h2>
+            <div class="hours-list">
+              <div class="hours-item">
+                <span class="day">Monday - Friday</span>
+                <span class="time">11:00 AM - 7:00 PM</span>
+              </div>
+              <div class="hours-item">
+                <span class="day">Saturday</span>
+                <span class="time">12:00 AM - 7:00 PM</span>
+              </div>
+              <div class="hours-item">
+                <span class="day">Sunday</span>
+                <span class="time">Closed</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <h2>Contact Information</h2>
+            <div class="contact-list">
+              <div class="contact-item">
+                <span class="contact-label">Phone:</span>
+                <span class="contact-value">+92 316 3007405</span>
+              </div>
+              <div class="contact-item">
+                <span class="contact-label">Email:</span>
+                <span class="contact-value">hussainluggagestore@gmail.com</span>
+              </div>
+              <div class="contact-item">
+                <span class="contact-label">Address:</span>
+                <span class="contact-value">403, Trade Center, Main University Rd, opposite expo center, Block 13 A Gulshan-e-Iqbal, Karachi, Pakistan</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Map Container -->
+        <div class="map-container">
+          <h2 class="map-title">Find Us on Map</h2>
+          <div class="map-wrapper">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3618.8435611653986!2d67.0733459748279!3d24.90331724354238!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3eb33f967beba46f%3A0xafc8f971b71dfdb2!2zSHVzc2FpbiBMdWdnYWdlIFN0b3JlINit2Y_Ys9uM2YYg2YTar9uM2Kwg2KfZkNiz2bnZiNix!5e0!3m2!1sen!2s!4v1766962383296!5m2!1sen!2s" 
+              width="100%" 
+              height="100%" 
+              style="border:0;" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Scripts -->
+  <script src="supabase-config.js"></script>
+  <script src="api-service.js"></script>
+  <script src="script.js"></script>
+
+</body>
+</html>
+
