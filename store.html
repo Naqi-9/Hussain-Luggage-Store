@@ -9,7 +9,7 @@
   <!-- Modern 2025 Font Integration -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="fonts.googleapis.com" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lato:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="style.css">
 </head>
@@ -49,37 +49,59 @@
       <!-- Shop by Brands Dropdown -->
       <div class="nav-dropdown">
         <a href="#" class="dropdown-toggle">SHOP BY BRANDS <span class="dropdown-arrow">▼</span></a>
-        <div class="dropdown-menu">
-          <a href="index.html" data-brand="American Tourister">American Tourister</a>
-          <a href="index.html" data-brand="Delsey">Delsey</a>
-          <a href="index.html" data-brand="iFLY">iFLY</a>
-          <a href="index.html" data-brand="IT">IT</a>
-          <a href="index.html" data-brand="Samsonite">Samsonite</a>
-          <a href="index.html" data-brand="Swiss Gear">Swiss Gear</a>
-          <a href="index.html" data-brand="Tommy">Tommy</a>
-          <a href="index.html" data-brand="VIP">VIP</a>
-          <a href="index.html" data-brand="DKNY">DKNY</a>
-          <a href="index.html" data-brand="Timberland">Timberland</a>
+        <div class="dropdown-menu" id="brands-dropdown">
+          <!-- Will be populated by JavaScript -->
+          <div class="dropdown-loading">Loading brands...</div>
         </div>
       </div>
       
       <!-- Shop by Category Dropdown -->
       <div class="nav-dropdown">
         <a href="#" class="dropdown-toggle">SHOP BY CATEGORY <span class="dropdown-arrow">▼</span></a>
-        <div class="dropdown-menu">
-          <a href="index.html" data-category="Hard Sided">Hard Sided</a>
-          <a href="index.html" data-category="Soft Sided">Soft Sided</a>
-          <a href="index.html" data-category="Duffle Bags">Duffle Bags</a>
+        <div class="dropdown-menu" id="categories-dropdown">
+          <!-- Will be populated by JavaScript -->
+          <div class="dropdown-loading">Loading categories...</div>
         </div>
       </div>
       
       <a href="store.html" class="active">OUR STORE</a>
-      <a href="#">CONTACT US</a>
+      <a href="contact.html">CONTACT US</a>
     </nav>
   </div> <!-- End Master Header -->
 
   <!-- Overlay for Mobile Menu background dimming -->
   <div class="overlay" id="overlay"></div>
+
+  <!-- Cart Drawer -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-drawer-header">
+      <h2>Your Cart</h2>
+      <button class="cart-close-btn" id="cartCloseBtn">✕</button>
+    </div>
+    <div class="cart-drawer-content" id="cartContent">
+      <div class="cart-empty" id="cartEmpty">
+        <p>Your cart is empty</p>
+        <p class="cart-empty-subtitle">Add items to get started</p>
+      </div>
+      <div class="cart-items" id="cartItems">
+        <!-- Cart items will be dynamically inserted here -->
+      </div>
+    </div>
+    <div class="cart-drawer-footer" id="cartFooter">
+      <div class="cart-total">
+        <div class="cart-total-row">
+          <span>Subtotal:</span>
+          <span id="cartSubtotal">Rs. 0</span>
+        </div>
+        <div class="cart-total-row cart-total-final">
+          <span>Total:</span>
+          <span id="cartTotal">Rs. 0</span>
+        </div>
+      </div>
+      <button class="cart-checkout-btn" id="cartCheckoutBtn">Checkout</button>
+    </div>
+  </div>
 
   <!-- Location Page Content -->
   <section class="location-section">
@@ -147,10 +169,56 @@
   </section>
 
   <!-- Scripts -->
-  <script src="supabase-config.js"></script>
-  <script src="api-service.js"></script>
-  <script src="script.js"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/filters.js"></script>
+  <script src="js/api-service.js"></script>
+  <script src="js/productdata.js"></script>
+  <script src="js/script.js"></script>
 
+  <!-- Add Font Awesome for social icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="footer-content">
+      <!-- Left Section: About -->
+      <div class="footer-section about-section">
+        <h3>Hussain Luggage Store</h3>
+        <p>At Hussain Luggage Store, we offer carefully crafted luggage built for comfort, durability, and everyday travel needs. Our goal is to make your travels easier with products you can rely on.</p>
+      </div>
+
+      <!-- Center Section: Quick Links -->
+      <div class="footer-section links-section">
+        <h3>Information</h3>
+        <ul class="footer-links">
+          <li><a href="store.html">Our Store</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <!-- Right Section: Newsletter -->
+      <div class="footer-section newsletter-section">
+        <h3>NewsLetter</h3>
+        <p>Subscribe to receive updates, access to exclusive deals, and more.</p>
+        <form class="newsletter-form">
+          <input type="email" placeholder="Enter your email" required>
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Social Media and Copyright -->
+    <div class="footer-bottom">
+      <div class="social-links">
+          <a href="https://www.facebook.com/p/Hussain-Luggage-Store-61563394599159/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/explore/locations/380302468502409/hussain-luggage-store/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://wa.me/hussainluggage" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      </div>
+      <div class="copyright">
+        <span>© 2026 Hussain Luggage Store.</span>
+        <span class="creator">Created by: <a href="https://wa.me/+923260872008" target="_blank">S. Ali</a></span>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
-

@@ -5,11 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Hussain Luggage Store - Premium travel suitcases, backpacks, and accessories. Shop the world's best brands in one place.">
   <title>Hussain Luggage Store - Premium Travel Luggage & Accessories</title>
+  <link rel="icon" href="assets/icons/logo org.png" type="image/png">
   
   <!-- Modern 2025 Font Integration -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="fonts.googleapis.com" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lato:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="style.css">
 </head>
@@ -44,37 +45,28 @@
     </div>  
 
     <nav class="navlinks">
-      <a href="#">ALL PRODUCTS</a>
+      <a href="index.html" class="active">ALL PRODUCTS</a>
       
       <!-- Shop by Brands Dropdown -->
       <div class="nav-dropdown">
         <a href="#" class="dropdown-toggle">SHOP BY BRANDS <span class="dropdown-arrow">▼</span></a>
-        <div class="dropdown-menu">
-          <a href="" data-brand="American Tourister">American Tourister</a>
-          <a href="#" data-brand="Delsey">Delsey</a>
-          <a href="#" data-brand="iFLY">iFLY</a>
-          <a href="#" data-brand="IT">IT</a>
-          <a href="#" data-brand="Samsonite">Samsonite</a>
-          <a href="#" data-brand="Swiss Gear">Swiss Gear</a>
-          <a href="#" data-brand="Tommy">Tommy</a>
-          <a href="#" data-brand="VIP">VIP</a>
-          <a href="#" data-brand="DKNY">DKNY</a>
-          <a href="#" data-brand="Timberland">Timberland</a>
+        <div class="dropdown-menu" id="brands-dropdown">
+          <!-- Will be populated by JavaScript -->
+          <div class="dropdown-loading">Loading brands...</div>
         </div>
       </div>
       
       <!-- Shop by Category Dropdown -->
       <div class="nav-dropdown">
         <a href="#" class="dropdown-toggle">SHOP BY CATEGORY <span class="dropdown-arrow">▼</span></a>
-        <div class="dropdown-menu">
-          <a href="#" data-category="Hard Sided">Hard Sided</a>
-          <a href="#" data-category="Soft Sided">Soft Sided</a>
-          <a href="#" data-category="Duffle Bags">Duffle Bags</a>
+        <div class="dropdown-menu" id="categories-dropdown">
+          <!-- Will be populated by JavaScript -->
+          <div class="dropdown-loading">Loading categories...</div>
         </div>
       </div>
       
       <a href="store.html">OUR STORE</a>
-      <a href="#">CONTACT US</a>
+      <a href="contact.html">CONTACT US</a>
     </nav>
   </div> <!-- End Master Header -->
 
@@ -112,15 +104,51 @@
     </div>
   </div>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-content">
-      <h1 class="hero-title">Premium Luggage for Your Journey</h1>
-      <p class="hero-subtitle">Discover our collection of high-quality suitcases, backpacks, and travel accessories</p>
-      <div class="hero-buttons">
-        <a href="#productsSection" class="btn btn-primary" id="shopNowBtn">Shop Now</a>
+  <!-- Hero Slider Section -->
+  <section class="hero-slider">
+    <!-- Slide 1 -->
+    <div class="hero-slide active" style="background-image: url('assets/images/hero 1 desktop.jpeg');">
+      <div class="hero-content">
+        <h1 class="hero-title">Elevate Your Travel Experience</h1>
+        <p class="hero-subtitle">Discover our exclusive collection of premium luggage and travel essentials designed for the modern explorer. Quality, style, and durability for every journey.</p>
+        <div class="hero-buttons">
+          <a href="#productsSection" class="btn btn-primary" id="shopNowBtn">Shop Collection</a>
+        </div>
       </div>
     </div>
+    
+    <!-- Slide 2 -->
+    <div class="hero-slide" style="background-image: url('assets/images/hero 2 desktop.jpeg');">
+      <div class="hero-content">
+        <h1 class="hero-title">Premium Luggage Collection</h1>
+        <p class="hero-subtitle">Explore our curated selection of high-quality luggage that combines style with functionality. Perfect for every traveler's needs.</p>
+        <div class="hero-buttons">
+          <a href="#productsSection" class="btn btn-primary" id="exploreNowBtn">Explore Now</a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Slide 3 -->
+    <div class="hero-slide" style="background-image: url('assets/images/Hero 3 desktop.jpeg');">
+      <div class="hero-content">
+        <h1 class="hero-title">Travel in Style & Comfort</h1>
+        <p class="hero-subtitle">Discover our exclusive range of premium luggage designed for the modern traveler. Lightweight, durable, and stylish.</p>
+        <div class="hero-buttons">
+          <a href="#productsSection" class="btn btn-primary" id="shopNowBtn2">Shop Now</a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Navigation Dots -->
+    <div class="slider-dots">
+      <button class="slider-dot active" data-slide="0" aria-label="Slide 1"></button>
+      <button class="slider-dot" data-slide="1" aria-label="Slide 2"></button>
+      <button class="slider-dot" data-slide="2" aria-label="Slide 3"></button>
+    </div>
+    
+    <!-- Navigation Arrows -->
+    <button class="slider-arrow prev" aria-label="Previous slide">❮</button>
+    <button class="slider-arrow next" aria-label="Next slide">❯</button>
   </section>
 
   <!-- Products Section -->
@@ -158,6 +186,7 @@
         <!-- Right Column: Product Info & Actions -->
         <div class="modal-info">
           <h2 id="modalName"></h2>
+          <p id="modalCategory" class="modal-category"></p>
           
           <div class="modal-labels">
 
@@ -186,8 +215,8 @@
           </div>
           <!-- Dual Primary Action Buttons -->
           <div class="modal-actions">
-            <button class="add-to-cart-btn-large">Add to Cart</button>
-            <button class="buy-now-btn">Buy Now</button>
+            <button class="add-to-cart-btn-large" id="addToCartBtn">Add to Cart</button>
+            <button class="buy-now-btn" id="buyNowBtn">Buy Now</button>
           </div>
 
           <div class="modal-section">
@@ -201,11 +230,84 @@
   </div>
 
   <!-- Scripts -->
-  
-  <script src="supabase-config.js"></script>
-  <script src="api-service.js"></script>
-  <script src="productdata.js"></script>
-  <script src="script.js"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/filters.js"></script>
+  <script src="js/api-service.js"></script>
+  <script src="js/productdata.js"></script>
+  <script src="js/hero-slider.js"></script>
+  <script src="js/script.js"></script>
 
+  <!-- Add Font Awesome for social icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="footer-content">
+      <!-- Left Section: About -->
+      <div class="footer-section about-section">
+        <h3>Hussain Luggage Store</h3>
+        <p>At Hussain Luggage Store, we offer carefully crafted luggage built for comfort, durability, and everyday travel needs. Our goal is to make your travels easier with products you can rely on.</p>
+      </div>
+
+      <!-- Center Section: Quick Links -->
+      <div class="footer-section links-section">
+        <h3>Information</h3>
+        <ul class="footer-links">
+          <li><a href="store.html">Our Store</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <!-- Right Section: Newsletter -->
+      <div class="footer-section newsletter-section">
+        <h3>NewsLetter</h3>
+        <p>Subscribe to receive updates, access to exclusive deals, and more.</p>
+        <form id="newsletterForm" class="newsletter-form">
+          <input type="email" id="newsletterEmail" placeholder="Enter your email" required>
+          <button type="submit">Subscribe</button>
+        </form>
+        <div id="newsletterMessage" class="message" style="display: none; margin-top: 10px; padding: 10px; border-radius: 4px;"></div>
+      </div>
+    </div>
+
+    <!-- Social Media and Copyright -->
+    <div class="footer-bottom">
+      <div class="social-links">
+        <a href="https://www.facebook.com/p/Hussain-Luggage-Store-61563394599159/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/explore/locations/380302468502409/hussain-luggage-store/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://wa.me/hussainluggage" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      </div>
+      <div class="copyright">
+        <span>© 2026 Hussain Luggage Store.</span>
+        <span class="creator">Created by: <a href="https://wa.me/+923260872008" target="_blank">S. Ali</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/notifications.js"></script>
+  <script src="js/newsletter.js"></script>
+  
+  <!-- WhatsApp Floating Button -->
+  <a href="https://wa.me/hussainluggage" class="whatsapp-float" target="_blank" rel="noopener noreferrer">
+    <img src="https://cdn-icons-png.flaticon.com/512/3670/3670051.png" alt="Chat on WhatsApp" />
+  </a>
+  
+  <!-- Purchase Notification Popup -->
+  <div class="purchase-notification" id="purchaseNotification" style="display: none;">
+    <div class="notification-content">
+      <button class="close-notification" id="closeNotification">×</button>
+      <div class="notification-header">
+        <span class="pulse-dot"></span>
+        <span>Someone Purchased</span>
+      </div>
+      <div class="notification-body">
+        <img src="" alt="Product" class="notification-product-image" id="notificationProductImage">
+        <div class="notification-details">
+          <p class="product-name" id="notificationProductName">Product Name</p>
+          <p class="purchase-time">Just now</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

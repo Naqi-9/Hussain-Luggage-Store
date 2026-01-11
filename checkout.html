@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Checkout - Complete Your Purchase at Hussain Luggage Store">
+  <title>Checkout - Hussain Luggage Store</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lato:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/css/intlTelInput.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .checkout-container {
+      max-width: 1200px;
+      margin: 160px auto 50px; /* Increased top margin from 120px to 160px */
+      padding: 0 20px;
+      display: flex;
+      flex-direction: row;
+      gap: 30px;
+      align-items: flex-start;
+    }
+
+    /* Mobile styles */
+    @media (max-width: 767px) {
+      .checkout-container {
+        flex-direction: column;
+        margin: 120px 0 70px 0;
+        gap: 20px;
+        padding: 0 15px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      
+      .order-summary {
+        position: static;
+        order: 1;
+        width: 100%;
+        margin: 0 0 20px 0;
+        padding: 20px 15px;
+        box-sizing: border-box;
+      }
+      
+      .checkout-form {
+        order: 2;
+        width: 100%;
+        padding: 20px 15px;
+        box-sizing: border-box;
+      }
+      
+      .form-row {
+        flex-direction: column;
+        gap: 15px;
+      }
+      
+      .form-row .form-group {
+        flex: 1 1 100%;
+        min-width: 100%;
+        width: 100%;
+      }
+      
+      .place-order-btn {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        border-radius: 0;
+        padding: 15px;
+        z-index: 100;
+        box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+        margin: 0;
+      }
+      
+      /* Ensure inputs don't overflow on mobile */
+      input[type="text"],
+      input[type="email"],
+      input[type="tel"],
+      select,
+      textarea {
+        max-width: 100% !important;
+        box-sizing: border-box;
+        -webkit-appearance: none;
+      }
+      
+      /* Fix for intl-tel-input on mobile */
+      .iti {
+        width: 100% !important;
+      }
+      
+      .iti--separate-dial-code .iti__selected-flag {
+        max-width: 90px;
+      }
+    }
+
+    .order-summary {
+      position: sticky;
+      top: 180px;
+      width: 38%;
+      background: #f8f9fa;
+      border-radius: 8px;
+      padding: 25px;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+      height: fit-content;
+      margin-left: 40px;
+      border: 1px solid #e9ecef;
+    }
+
+    .checkout-form {
+      flex: 1;
+      min-width: 300px;
+      background-color: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+      max-width: 800px;
+    }
+    
+    .form-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+    
+    .form-row .form-group {
+      flex: 1 1 calc(50% - 15px);
+      min-width: 200px;
+      margin-bottom: 0;
+    }
+    
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group input[type="tel"],
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+    
+    /* Style for intl-tel-input */
+    .iti {
+      display: block;
+      position: relative;
+      width: 100%;
+    }
+    
+    .iti__flag {box-shadow: 0px 0px 1px 0px #888;}
+    
+    .iti--separate-dial-code .iti__selected-flag {
+      background-color: #f8f9fa;
+      border-radius: 6px 0 0 6px;
+      border-right: 1px solid #e0e0e0;
+    }
+    
+    /* Fix for country dropdown */
+    .iti--separate-dial-code .iti__selected-flag {
+      max-width: 120px;
+      min-width: 100px;
+    }
+    
+    .iti__country-list {
+      position: absolute;
+      z-index: 2;
+      list-style: none;
+      text-align: left;
+      padding: 0;
+      margin: 0 0 0 -1px;
+      box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+      background-color: white;
+      border: 1px solid #ccc;
+      white-space: nowrap;
+      max-height: 200px;
+      overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
+      width: auto !important;
+      min-width: 240px;
+    }
+    
+    .iti__country {
+      padding: 5px 10px;
+      outline: none;
+    }
+    
+    .iti__country:hover, .iti__country.iti__highlight {
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+    
+    .iti--allow-dropdown input, 
+    .iti--allow-dropdown input[type=tel], 
+    .iti--allow-dropdown input[type=text], 
+    .iti--separate-dial-code input, 
+    .iti--separate-dial-code input[type=tel], 
+    .iti--separate-dial-code input[type=text] {
+      padding-left: 100px !important;
+      text-align: center;
+      width: 100%;
+      border-radius: 6px;
+      border: 1px solid #e0e0e0;
+      height: 48px;
+      background-color: #f8f9fa;
+    }
+    
+    .iti--allow-dropdown input:focus, 
+    .iti--allow-dropdown input[type=tel]:focus, 
+    .iti--allow-dropdown input[type=text]:focus, 
+    .iti--separate-dial-code input:focus, 
+    .iti--separate-dial-code input[type=tel]:focus, 
+    .iti--separate-dial-code input[type=text]:focus {
+      border-color: #3498db;
+      box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+      outline: none;
+      background-color: #fff;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 25px;
+      color: #000000;
+      letter-spacing: -0.3px;
+      text-align: left;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: #2c3e50;
+      font-size: 0.95rem;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group input[type="tel"],
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: all 0.2s ease;
+      background-color: #f8f9fa;
+      color: #2c3e50;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: #3498db;
+      box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+      outline: none;
+      background-color: #fff;
+    }
+
+    .phone-input {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .phone-input select {
+      flex: 0 0 100px;
+    }
+
+    .phone-input input {
+      flex: 1;
+    }
+
+    .payment-method {
+      margin: 20px 0;
+      padding: 15px;
+      border: 1px solid #eee;
+      border-radius: 4px;
+    }
+
+    .payment-method label {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+
+    .payment-method input[type="radio"] {
+      margin-right: 10px;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border: 2px solid #000;
+      border-radius: 50%;
+      outline: none;
+      cursor: pointer;
+      position: relative;
+      vertical-align: middle;
+    }
+    
+    .payment-method input[type="radio"]:checked {
+      background-color: #000;
+      border-color: #000;
+    }
+    
+    .payment-method input[type="radio"]:checked::after {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background-color: white;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    
+    .payment-method input[type="radio"]:focus {
+      box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.2);
+    }
+
+    .payment-details {
+      margin-top: 10px;
+      padding: 15px;
+      background-color: #f9f9f9;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .order-item {
+      display: flex;
+      align-items: center;
+      padding: 15px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .order-item:last-child {
+      border-bottom: none;
+    }
+
+    .order-item img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 4px;
+      margin-right: 15px;
+    }
+
+    .item-details {
+      flex: 1;
+    }
+
+    .item-title {
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .item-variants {
+      font-size: 0.85rem;
+      color: #666;
+      margin-bottom: 5px;
+    }
+
+    .item-price {
+      font-weight: 600;
+      color: #000;
+    }
+
+    .order-totals {
+      margin-top: 20px;
+      padding-top: 15px;
+      border-top: 1px solid #eee;
+    }
+
+    .total-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .total-row.total {
+      font-size: 1.2rem;
+      font-weight: 700;
+      padding-top: 10px;
+      border-top: 1px solid #eee;
+      margin-top: 10px;
+    }
+
+    .checkout-btn {
+      width: 100%;
+      padding: 15px;
+      background-color: #000;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+        
+    .checkout-btn:hover {
+      background-color: #333;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .checkout-btn:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
+    .error {
+      color: #e74c3c;
+      font-size: 0.85rem;
+      margin-top: 5px;
+      display: none;
+    }
+
+    .error.visible {
+      display: block;
+    }
+
+    /* Tablet and mobile styles (up to 992px) */
+    @media (max-width: 992px) {
+      .checkout-container {
+        flex-direction: column;
+        margin: 100px auto 50px;
+        width: 100%;
+        max-width: 100%;
+        padding: 0 20px;
+        box-sizing: border-box;
+      }
+
+      .order-summary {
+        position: static;
+        order: 1;
+        width: 100% !important;
+        margin: 0 0 20px 0 !important;
+        padding: 20px;
+        box-sizing: border-box;
+        max-width: 100%;
+      }
+      
+      .checkout-form {
+        order: 2;
+        width: 100%;
+        max-width: 100%;
+        padding: 0;
+        margin-bottom: 100px; /* Add space for fixed button */
+      }
+      
+      .form-row {
+        flex-direction: column;
+        gap: 15px;
+      }
+      
+      .form-row .form-group {
+        flex: 1 1 100%;
+        min-width: 100%;
+        width: 100%;
+      }
+      
+      .place-order-btn {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        border-radius: 0;
+        padding: 15px;
+        z-index: 100;
+        box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+        margin: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Master Header: Groups Logo row and Nav links together for Desktop + Quick View -->
+  <div class="master-header">
+    <div id="header">
+      <div class="lefticons">
+        <button class="menu" id="menuBtn"><img src="assets/icons/menu.png" alt="menu"></button>
+        <div class="hidden">h</div>
+      </div>
+      
+      <div class="logo">
+        <img src="assets/icons/logo.png" alt="Hussain Luggage Store">
+      </div>
+      
+      <div class="righticons">
+        <div class="search"><img src="assets/icons/search.png" alt="search"></div>
+        <div class="cart" id="cartIcon">
+          <img src="assets/icons/cart.png" alt="cart">
+          <span class="cart-badge" id="cartBadge">0</span>
+        </div>
+        
+        <!-- Search Dropdown is now strictly contained in the header bar -->
+        <div class="search-dropdown" id="searchDropdown">
+          <input type="text" id="searchInput" placeholder="Search for products..." autocomplete="off">
+          <button class="search-close-btn" id="searchCloseBtn">✕</button>
+        </div>
+      </div>
+    </div>  
+
+    <nav class="navlinks">
+      <a href="index.html">ALL PRODUCTS</a>
+      
+      <!-- Shop by Brands Dropdown -->
+      <div class="nav-dropdown">
+        <a href="#" class="dropdown-toggle">SHOP BY BRANDS <span class="dropdown-arrow">▼</span></a>
+        <div class="dropdown-menu" id="brands-dropdown">
+          <!-- Will be populated by JavaScript -->
+          <div class="dropdown-loading">Loading brands...</div>
+        </div>
+      </div>
+      
+      <!-- Shop by Category Dropdown -->
+      <div class="nav-dropdown">
+        <a href="#" class="dropdown-toggle">SHOP BY CATEGORY <span class="dropdown-arrow">▼</span></a>
+        <div class="dropdown-menu" id="categories-dropdown">
+          <!-- Will be populated by JavaScript -->
+          <div class="dropdown-loading">Loading categories...</div>
+        </div>
+      </div>
+      
+      <a href="store.html">OUR STORE</a>
+      <a href="contact.html">CONTACT US</a>
+    </nav>
+  </div> <!-- End Master Header -->
+
+  <!-- Overlay for Mobile Menu background dimming -->
+  <div class="overlay" id="overlay"></div>
+
+  <!-- Cart Drawer -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-drawer-header">
+      <h2>Your Cart</h2>
+      <button class="cart-close-btn" id="cartCloseBtn">✕</button>
+    </div>
+    <div class="cart-drawer-content" id="cartContent">
+      <div class="cart-empty" id="cartEmpty">
+        <p>Your cart is empty</p>
+        <p class="cart-empty-subtitle">Add items to get started</p>
+      </div>
+      <div class="cart-items" id="cartItems">
+        <!-- Cart items will be dynamically inserted here -->
+      </div>
+    </div>
+    <div class="cart-drawer-footer" id="cartFooter">
+      <div class="cart-total">
+        <div class="cart-total-row">
+          <span>Subtotal:</span>
+          <span id="cartSubtotal">Rs. 0</span>
+        </div>
+        <div class="cart-total-row cart-total-final">
+          <span>Total:</span>
+          <span id="cartTotal">Rs. 0</span>
+        </div>
+      </div>
+      <button class="cart-checkout-btn" id="cartCheckoutBtn">Proceed to Checkout</button>
+    </div>
+  </div>
+
+  <div class="checkout-container">
+    <!-- Checkout Form Section -->
+    <div class="checkout-form">
+      <h2 class="section-title">Contact Information</h2>
+      <form id="checkoutForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="email">Email *</label>
+            <input type="email" id="email" name="email" required style="width: 100%;">
+            <div class="error" id="emailError">Please enter a valid email address</div>
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" placeholder="321 1234567" maxlength="11" pattern="\d{3} \d{7}" required>
+            <div class="error-message"></div>
+          </div>
+        </div>
+
+        <h2 class="section-title">Delivery Information</h2>
+        
+        <div class="form-group">
+          <label for="customerName">Name *</label>
+          <input type="text" id="customerName" name="customerName" required style="width: 100%;">
+          <div class="error" id="nameError">Please enter your full name</div>
+        </div>
+
+        <div class="form-group">
+          <label for="country">Country</label>
+          <input type="text" id="country" name="country" value="Pakistan" readonly>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="city">City *</label>
+            <input type="text" id="city" name="city" value="Karachi" readonly style="width: 100%;">
+            <div class="error" id="cityError"></div>
+          </div>
+
+        </div>
+
+        <div class="form-group">
+          <label for="address">Shipping Address *</label>
+          <textarea id="address" name="address" rows="3" required></textarea>
+          <div class="error" id="addressError">Please enter your shipping address</div>
+        </div>
+
+
+        <h2 class="section-title">Payment Method</h2>
+        
+        <div class="payment-method">
+          <label>
+            <input type="radio" name="paymentMethod" value="bank" required> 
+            <span>Bank Transfer (Rs. 500 Off)</span>
+          </label>
+          <div class="payment-details" id="bankDetails">
+            <p>Make a direct bank transfer to complete your purchase and get Rs. 500 off.</p>
+            <p>Bank Name: <strong>Faisal Bank</strong></p>
+            <p>Account Title: <strong>Hussain Luggage Store</strong></p>
+            <p>Account Number: <strong>3567301000002567</strong></p>
+            <p>After making the payment, please send the transaction screenshot to our WhatsApp at <a href="https://wa.me/hussainluggage" style="color: #25D366; text-decoration: none; font-weight: 600;">Hussain Luggage Store</a> with your name and order number.</p>
+          </div>
+        </div>
+
+        <div class="payment-method">
+          <label>
+            <input type="radio" name="paymentMethod" value="cod"> 
+            <span>Cash on Delivery</span>
+          </label>
+          
+        </div>
+
+        <button type="submit" class="checkout-btn" id="placeOrderBtn">Place Order</button>
+      </form>
+    </div>
+    
+    <!-- Order Summary Section -->
+    <div class="order-summary">
+      <h2 class="section-title">Order Summary</h2>
+      <div id="orderItems">
+        <!-- Order items will be dynamically inserted here -->
+      </div>
+      <div class="order-totals" style="margin-top: 25px; border-top: 1px solid #eee; padding-top: 20px;">
+        <div class="subtotal" style="display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 1rem;">
+          <span>Subtotal</span>
+          <span id="subtotal" style="font-weight: 500;">Rs. 0.00</span>
+        </div>
+        <div class="shipping" style="display: flex; justify-content: space-between; margin-bottom: 12px; color: #7f8c8d; font-size: 0.95rem;">
+          <span>Shipping</span>
+          <span>Free all over Karachi</span>
+        </div>
+        <div class="total" style="display: flex; justify-content: space-between; margin-top: 20px; padding-top: 15px; border-top: 1px solid #eee; font-size: 1.1rem; font-weight: 600;">
+          <span>Total</span>
+          <span id="total" style="color: #2c3e50;">Rs. 0.00</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/intlTelInput.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/api-service.js"></script>
+  <script src="js/filters.js"></script>
+  <script src="js/productdata.js"></script>
+  <script src="js/script.js"></script>
+  <script>
+    // Initialize intl-tel-input
+    const phoneInput = document.querySelector("#phone");
+    
+    // Initialize intl-tel-input first
+    const phoneInputInstance = window.intlTelInput(phoneInput, {
+      initialCountry: "pk",
+      preferredCountries: ["pk", "us", "gb", "ae", "sa"],
+      separateDialCode: true,
+      nationalMode: false,
+      utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js"
+    });
+    
+    // Format phone number as user types
+    const formatPhoneNumber = function(e) {
+      // Get the current cursor position
+      const cursorPosition = this.selectionStart;
+      
+      // Remove all non-digit characters
+      let value = this.value.replace(/\D/g, '');
+      
+      // Add space after 3 digits if not already present
+      if (value.length > 3) {
+        value = value.substring(0, 3) + ' ' + value.substring(3);
+      }
+      
+      // Limit to 10 digits + 1 space
+      if (value.length > 11) {
+        value = value.substring(0, 11);
+      }
+      
+      // Update the input value
+      this.value = value;
+      
+      // Restore cursor position
+      this.setSelectionRange(cursorPosition, cursorPosition);
+    };
+    
+    // Add input event listener for formatting
+    phoneInput.addEventListener('input', formatPhoneNumber);
+
+    // Update hidden input with full number on form submit
+    document.getElementById('checkoutForm').addEventListener('submit', function(e) {
+      const phoneNumber = phoneInputInstance.getNumber();
+      if (phoneNumber) {
+        const hiddenInput = document.createElement('input');
+        hiddenInput.type = 'hidden';
+        hiddenInput.name = 'full_phone';
+        hiddenInput.value = phoneNumber;
+        this.appendChild(hiddenInput);
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const orderItemsContainer = document.getElementById('orderItems');
+      const subtotalElement = document.getElementById('subtotal');
+      const totalElement = document.getElementById('total');
+      
+      // Check for direct product in URL parameters
+      const urlParams = new URLSearchParams(window.location.search);
+      const isDirectPurchase = urlParams.get('direct') === 'true';
+      
+      let subtotal = 0;
+      let items = [];
+
+      if (isDirectPurchase) {
+        // Handle direct product purchase
+        const product = {
+          id: urlParams.get('id'),
+          name: decodeURIComponent(urlParams.get('name') || ''),
+          price: parseFloat(urlParams.get('price') || 0),
+          quantity: parseInt(urlParams.get('quantity') || 1),
+          color: decodeURIComponent(urlParams.get('color') || ''),
+          size: decodeURIComponent(urlParams.get('size') || ''),
+          image: urlParams.get('image') || 'assets/icons/logo.png'
+        };
+        
+        if (product.id) {
+          items = [product];
+          // Hide cart-related UI elements if needed
+          document.querySelectorAll('.cart-only').forEach(el => el.style.display = 'none');
+        }
+      } else {
+        // Handle regular cart checkout
+        items = JSON.parse(localStorage.getItem('cart')) || [];
+      }
+
+      // Render order items
+      if (items.length === 0) {
+        orderItemsContainer.innerHTML = '<p>No items to display</p>';
+      } else {
+        orderItemsContainer.innerHTML = '';
+        
+        items.forEach(item => {
+          const itemTotal = item.price * item.quantity;
+          subtotal += itemTotal;
+          
+          const itemElement = document.createElement('div');
+          itemElement.className = 'order-item';
+          itemElement.innerHTML = `
+            <img src="${item.image}" alt="${item.name}">
+            <div class="item-details">
+              <div class="item-title">${item.name}</div>
+              <div class="item-variants">
+                ${item.color ? `${item.color} • ` : ''}${item.size ? `Size: ${item.size} • ` : ''}Qty: ${item.quantity}
+              </div>
+              <div class="item-price">Rs. ${itemTotal.toLocaleString()}</div>
+            </div>
+          `;
+          orderItemsContainer.appendChild(itemElement);
+        });
+      }
+
+      // Function to update total based on payment method
+      function updateTotal() {
+        const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked');
+        let total = subtotal;
+        
+        // Apply bank transfer discount if selected
+        if (paymentMethod && paymentMethod.value === 'bank') {
+          total = Math.max(0, subtotal - 500); // Ensure total doesn't go below 0
+        }
+        
+        // Update the display
+        subtotalElement.textContent = `Rs. ${subtotal.toLocaleString()}`;
+        totalElement.textContent = `Rs. ${total.toLocaleString()}`;
+        
+        return total;
+      }
+      
+      // Set initial total
+      let currentTotal = updateTotal();
+      
+      // Add event listener for payment method changes
+      document.querySelectorAll('input[name="paymentMethod"]').forEach(radio => {
+        radio.addEventListener('change', () => {
+          currentTotal = updateTotal();
+          
+          // Update the hidden order data with the new total
+          const orderDataInput = document.querySelector('input[name="order_data"]');
+          if (orderDataInput) {
+            const orderData = JSON.parse(orderDataInput.value);
+            orderData.total = currentTotal;
+            orderDataInput.value = JSON.stringify(orderData);
+          }
+        });
+      });
+      
+      // Store order data in a hidden field for form submission
+      const orderDataInput = document.createElement('input');
+      orderDataInput.type = 'hidden';
+      orderDataInput.name = 'order_data';
+      orderDataInput.value = JSON.stringify({
+        items: items,
+        isDirectPurchase: isDirectPurchase,
+        subtotal: subtotal,
+        total: currentTotal || subtotal,
+        paymentMethod: document.querySelector('input[name="paymentMethod"]:checked')?.value || ''
+      });
+      document.getElementById('checkoutForm').appendChild(orderDataInput);
+
+      // Get form elements
+      const form = document.getElementById('checkoutForm');
+      const emailInput = document.getElementById('email');
+      const phoneInput = document.getElementById('phone');
+      const customerNameInput = document.getElementById('customerName');
+      const citySelect = document.getElementById('city');
+      const addressInput = document.getElementById('address');
+
+      // Show error message
+      function showError(input, message) {
+        const errorElement = document.getElementById(`${input.id}Error`);
+        if (errorElement) {
+          errorElement.textContent = message;
+          errorElement.classList.add('visible');
+        }
+        if (input) {
+          input.classList.add('error-border');
+        }
+      }
+
+      // Hide error message
+      function hideError(input) {
+        if (!input) return;
+        const errorElement = document.getElementById(`${input.id}Error`);
+        if (errorElement) {
+          errorElement.classList.remove('visible');
+        }
+        input.classList.remove('error-border');
+      }
+
+      // Validate email
+      function validateEmail() {
+        const email = emailInput.value.trim();
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        
+        if (!email) {
+          showError(emailInput, 'Email is required');
+          return false;
+        } else if (!emailRegex.test(email)) {
+          showError(emailInput, 'Please enter a valid email address');
+          return false;
+        } else {
+          hideError(emailInput);
+          return true;
+        }
+      }
+
+      // Validate phone number
+      function validatePhone() {
+        const phone = phoneInput.value.replace(/\s/g, ''); // Remove all spaces for validation
+        const phoneRegex = /^\d{10}$/;
+        
+        if (!phone) {
+          showError(phoneInput, 'Phone number is required');
+          return false;
+        } else if (!phoneRegex.test(phone)) {
+          showError(phoneInput, 'Please enter a valid 10-digit phone number');
+          return false;
+        } else {
+          hideError(phoneInput);
+          return true;
+        }
+      }
+
+      // Validate required field
+      function validateRequired(input, fieldName) {
+        if (!input.value.trim()) {
+          showError(input, `${fieldName} is required`);
+          return false;
+        } else {
+          hideError(input);
+          return true;
+        }
+      }
+
+      // Event listeners for real-time validation
+      if (emailInput) emailInput.addEventListener('blur', validateEmail);
+      if (phoneInput) phoneInput.addEventListener('blur', validatePhone);
+      if (customerNameInput) customerNameInput.addEventListener('blur', () => validateRequired(customerNameInput, 'Name'));
+      if (citySelect) citySelect.addEventListener('change', () => validateRequired(citySelect, 'City'));
+      if (addressInput) addressInput.addEventListener('blur', () => validateRequired(addressInput, 'Address'));
+
+      // Form submission
+      form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        // Validate all fields
+        const isEmailValid = validateEmail();
+        const isPhoneValid = validatePhone();
+        const isNameValid = validateRequired(customerNameInput, 'Name');
+        const isCityValid = validateRequired(citySelect, 'City');
+        const isAddressValid = validateRequired(addressInput, 'Address');
+        
+        // Check if at least one payment method is selected
+        const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked');
+        if (!paymentMethod) {
+          alert('Please select a payment method');
+          return;
+        }
+
+        // If all validations pass, submit the form
+        if (isEmailValid && isPhoneValid && isNameValid && isCityValid && isAddressValid) {
+          const submitBtn = document.getElementById('placeOrderBtn');
+          submitBtn.disabled = true;
+          submitBtn.textContent = 'Processing...';
+          
+          try {
+            // Get the order data
+            const orderData = JSON.parse(document.querySelector('input[name="order_data"]').value);
+            
+            // Prepare order data for Supabase
+            const order = {
+              customer_name: customerNameInput.value.trim(),
+              email: emailInput.value.trim(),
+              phone: phoneInputInstance.getNumber(), // Get full international number with country code
+              shipping_address: addressInput.value.trim(),
+              city: citySelect.value,
+              country: 'Pakistan',
+              items: orderData.items.map(item => ({
+                product_id: item.productId || item.id, // Use productId if available, fallback to id
+                name: item.name,
+                price: item.price,
+                quantity: item.quantity,
+                image: item.image,
+                color: item.color,
+                size: item.size
+              })),
+              subtotal: orderData.subtotal,
+              shipping_fee: orderData.shipping || 0,
+              total_amount: orderData.total,
+              status: 'pending',
+              payment_method: paymentMethod.value,
+              notes: orderData.notes || ''
+            };
+
+            // Send order to Supabase
+            const supabase = getSupabaseClient();
+            const response = await fetch(`${supabase.url}/rest/v1/orders`, {
+              method: 'POST',
+              headers: {
+                ...supabase.headers,
+                'Content-Type': 'application/json',
+                'Prefer': 'return=representation'
+              },
+              body: JSON.stringify(order)
+            });
+
+            if (!response.ok) {
+              const error = await response.json();
+              throw new Error(error.message || 'Failed to place order');
+            }
+
+            const [savedOrder] = await response.json();
+            console.log('Order saved:', savedOrder);
+            
+            // Clear the cart if not a direct purchase
+            if (!orderData.isDirectPurchase) {
+              localStorage.removeItem('cart');
+            }
+            
+            // Redirect to order confirmation page with order details
+            const orderParams = new URLSearchParams({
+              orderId: savedOrder.order_number,
+              total: orderData.total.toLocaleString(),
+              items: orderData.items.length,
+              paymentMethod: paymentMethod.value
+            }).toString();
+            
+            window.location.href = 'order-confirmation.html?' + orderParams;
+          } catch (error) {
+            console.error('Error processing order:', error);
+            alert('There was an error processing your order. Please try again. ' + error.message);
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Place Order';
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>
