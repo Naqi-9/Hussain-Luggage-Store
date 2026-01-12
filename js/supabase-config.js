@@ -21,16 +21,27 @@ function getSupabaseClient() {
 }
 
 // Helper function to fetch from Supabase
-async function fetchFromSupabase(table, select = '*', filters = {}) {
+async function fetchFromSupabase(table, select = '*', filters = {}, orderBy = null) {
   const client = getSupabaseClient();
   let url = `${client.url}/rest/v1/${table}?select=${select}`;
   
   // Add filters if provided
   if (Object.keys(filters).length > 0) {
     const filterParams = Object.entries(filters)
+      .filter(([key]) => key !== 'orderBy') // Skip orderBy in filters
       .map(([key, value]) => `${key}=eq.${encodeURIComponent(value)}`)
       .join('&');
-    url += `&${filterParams}`;
+    if (filterParams) {
+      url += `&${filterParams}`;
+    }
+  }
+  
+  // Add ordering if specified
+  if (orderBy) {
+    url += `&order=${encodeURIComponent(orderBy)}`;
+  } else if (filters.orderBy) {
+    // For backward compatibility, check filters.orderBy
+    url += `&order=${encodeURIComponent(filters.orderBy)}`;
   }
   
   console.log('Fetching from Supabase:', {

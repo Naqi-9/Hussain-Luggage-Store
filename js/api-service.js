@@ -81,8 +81,9 @@ async function fetchProducts() {
     
     console.log('Fetching products from Supabase...', window.SUPABASE_CONFIG.url);
     
-    // Fetch products from Supabase
-    const data = await window.fetchFromSupabase('products', '*');
+    // Fetch products from Supabase, ordered by display_order (ascending)
+    // If display_order is null, those items will appear last
+    const data = await window.fetchFromSupabase('products', '*', {}, 'display_order.asc.nullslast');
     
     console.log('Raw data from Supabase:', data);
     console.log(`Fetched ${data ? data.length : 0} products from database`);
