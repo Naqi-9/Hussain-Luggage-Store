@@ -1288,6 +1288,12 @@ body {
     }
 }
 /* Hero Slider Styles */
+#shopNowBtn4 {
+    margin-top: 300px;
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
 .hero-slider {
     position: relative;
     width: 100%;
@@ -1389,6 +1395,14 @@ body {
     .hero-slider {
         min-height: 100vh;
         margin-bottom: 0;
+    }
+    
+    /* Mobile-specific image for 4th slide */
+    .hero-slide:nth-child(4) {
+        background-image: url('../assets/images/Hero\ section\ 4\ phone.png') !important;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
     }
     
     .hero-content {
