@@ -316,6 +316,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setupHeroButton('shopNowBtn');    // First slide
     setupHeroButton('exploreNowBtn'); // Second slide
     setupHeroButton('shopNowBtn2');   // Third slide
+    setupHeroButton('shopNowBtn4');   // Fourth slide
 
     // Filter state (now managed globally in productdata.js)
     // These are kept for backward compatibility but will sync with global state
