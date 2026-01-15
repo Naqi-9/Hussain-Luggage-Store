@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: hussainluggage.pk/sitemap.xml
+Sitemap: https://hussainluggage.pk/sitemap.xml
