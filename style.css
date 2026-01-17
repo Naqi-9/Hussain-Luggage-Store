@@ -250,6 +250,10 @@ body {
   background-color: #25D366;
 }
 
+.social-links a[aria-label="YouTube"]:hover {
+  background-color: #FF0000;
+}
+
 .copyright {
   text-align: center;
   color: #666;
